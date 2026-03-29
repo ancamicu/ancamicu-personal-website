@@ -100,7 +100,65 @@
   <div class="container">
     <h2>Interactive tools</h2>
     <p class="lead">These practical tools are designed for planning conversations, scenario testing, and internal analysis.</p>
-    <div class="tools-grid">
+
+    <div style="display:grid; grid-template-columns:1fr; gap:1.3rem; max-width:980px;">
+
+      <div class="tool-panel">
+        <h3>Faculty qualifications estimator</h3>
+        <p class="small">Use this as a planning aid to estimate likely classification under a school’s framework aligned with AACSB categories.</p>
+        <form id="fq-form" onsubmit="return false;">
+          <div class="form-grid">
+            <label>Terminal degree in closely related teaching field?
+              <select id="terminal-degree">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+            <label>Master’s degree in closely related teaching field?
+              <select id="masters-degree">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+            <label>Substantial relevant professional experience?
+              <select id="substantial-experience">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+            <label>Sustained scholarly activity/publications?
+              <select id="sustained-scholarly">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+            <label>Ongoing sustained academic activities?
+              <select id="sustained-academic">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+            <label>Ongoing sustained professional engagement?
+              <select id="sustained-professional">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+            <label>Demonstrated teaching effectiveness?
+              <select id="teaching-effective">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+          </div>
+          <div class="calc-actions">
+            <button class="btn btn-primary" id="fq-calc-btn" type="button">Estimate faculty category</button>
+            <button class="btn btn-secondary" id="fq-reset-btn" type="button">Reset</button>
+          </div>
+        </form>
+        <div id="fq-results" class="result-box"></div>
+      </div>
+
       <div class="tool-panel">
         <h3>Undergraduate coverage calculator</h3>
         <p class="small">Enter total undergraduate sections, discipline mix, full-time faculty counts by qualification, and normal section loads. Remaining uncovered sections are treated as IP adjuncts teaching one section each.</p>
@@ -136,55 +194,62 @@
               If faculty coverage does not reach the total, the remaining sections are assumed to be taught by IP adjuncts at one section per year.
             </div>
           </div>
+
           <div class="form-grid-5">
-            <div><label>SA faculty<input type="number" min="0" step="1" id="grad-SA-count" value="3"></label><label>Avg. sections<input type="number" min="0" step="0.1" id="grad-SA-avg" value="3"></label></div>
-            <div><label>PA faculty<input type="number" min="0" step="1" id="grad-PA-count" value="1"></label><label>Avg. sections<input type="number" min="0" step="0.1" id="grad-PA-avg" value="2"></label></div>
-            <div><label>SP faculty<input type="number" min="0" step="1" id="grad-SP-count" value="1"></label><label>Avg. sections<input type="number" min="0" step="0.1" id="grad-SP-avg" value="2"></label></div>
-            <div><label>IP faculty<input type="number" min="0" step="1" id="grad-IP-count" value="2"></label><label>Avg. sections<input type="number" min="0" step="0.1" id="grad-IP-avg" value="3"></label></div>
-            <div><label>Additional faculty<input type="number" min="0" step="1" id="grad-Additional-count" value="0"></label><label>Avg. sections<input type="number" min="0" step="0.1" id="grad-Additional-avg" value="0"></label></div>
+            <div>
+              <label>SA faculty
+                <input type="number" min="0" step="1" id="grad-SA-count" value="3">
+              </label>
+              <label>Avg. sections
+                <input type="number" min="0" step="0.1" id="grad-SA-avg" value="3">
+              </label>
+            </div>
+
+            <div>
+              <label>PA faculty
+                <input type="number" min="0" step="1" id="grad-PA-count" value="1">
+              </label>
+              <label>Avg. sections
+                <input type="number" min="0" step="0.1" id="grad-PA-avg" value="2">
+              </label>
+            </div>
+
+            <div>
+              <label>SP faculty
+                <input type="number" min="0" step="1" id="grad-SP-count" value="1">
+              </label>
+              <label>Avg. sections
+                <input type="number" min="0" step="0.1" id="grad-SP-avg" value="2">
+              </label>
+            </div>
+
+            <div>
+              <label>IP faculty
+                <input type="number" min="0" step="1" id="grad-IP-count" value="2">
+              </label>
+              <label>Avg. sections
+                <input type="number" min="0" step="0.1" id="grad-IP-avg" value="3">
+              </label>
+            </div>
+
+            <div>
+              <label>Additional faculty
+                <input type="number" min="0" step="1" id="grad-Additional-count" value="0">
+              </label>
+              <label>Avg. sections
+                <input type="number" min="0" step="0.1" id="grad-Additional-avg" value="0">
+              </label>
+            </div>
           </div>
+
           <div class="calc-actions">
             <button class="btn btn-primary" id="grad-calc-btn" type="button">Calculate graduate coverage</button>
             <button class="btn btn-secondary" id="grad-reset-btn" type="button">Reset</button>
           </div>
         </form>
         <div id="grad-results" class="result-box"></div>
-
-        <hr style="border:none;border-top:1px solid #d9dddf;margin:1.5rem 0">
-
-        <h3>Faculty qualifications estimator</h3>
-        <p class="small">Use this as a planning aid to estimate likely classification under a school’s framework aligned with AACSB categories.</p>
-        <form id="fq-form" onsubmit="return false;">
-          <div class="form-grid">
-            <label>Terminal degree in closely related teaching field?
-              <select id="terminal-degree"><option value="yes">Yes</option><option value="no">No</option></select>
-            </label>
-            <label>Master’s degree in closely related teaching field?
-              <select id="masters-degree"><option value="yes">Yes</option><option value="no">No</option></select>
-            </label>
-            <label>Substantial relevant professional experience?
-              <select id="substantial-experience"><option value="yes">Yes</option><option value="no">No</option></select>
-            </label>
-            <label>Sustained scholarly activity/publications?
-              <select id="sustained-scholarly"><option value="yes">Yes</option><option value="no">No</option></select>
-            </label>
-            <label>Ongoing sustained academic activities?
-              <select id="sustained-academic"><option value="yes">Yes</option><option value="no">No</option></select>
-            </label>
-            <label>Ongoing sustained professional engagement?
-              <select id="sustained-professional"><option value="yes">Yes</option><option value="no">No</option></select>
-            </label>
-            <label>Demonstrated teaching effectiveness?
-              <select id="teaching-effective"><option value="yes">Yes</option><option value="no">No</option></select>
-            </label>
-          </div>
-          <div class="calc-actions">
-            <button class="btn btn-primary" id="fq-calc-btn" type="button">Estimate faculty category</button>
-            <button class="btn btn-secondary" id="fq-reset-btn" type="button">Reset</button>
-          </div>
-        </form>
-        <div id="fq-results" class="result-box"></div>
       </div>
+
     </div>
   </div>
 </section>
